@@ -13,7 +13,7 @@ pipeline {
         stage('Run') {
             steps {
                 script {
-                    docker.run("-p 80:80 -d homework:1")
+                    docker.run("-p 90:90 -d homework:1")
                 }
             }
         }
