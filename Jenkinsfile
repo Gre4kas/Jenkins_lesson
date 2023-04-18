@@ -1,10 +1,15 @@
 pipeline {
-    agent { dockerfile true }
+    agent any
+
     stages {
-        stage('Test') {
+        stage('Build Docker Image') {
             steps {
-                sh 'node --version'
-                sh 'svn --version'
+                sh 'docker build -t my-image:17 -f Dockerfile .'
+            }
+        }
+        stage('Run Docker Container') {
+            steps {
+                sh 'docker run -p 8080:90 my-image:17'
             }
         }
     }
