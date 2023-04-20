@@ -1,14 +1,20 @@
 pipeline {
     agent any
-    environment {
-        DOCKER_TLS_VERIFY = "1"
-        DOCKER_CERT_PATH = "/root/.docker"
-        DOCKER_HOST = "tcp://192.168.65.0:2376"
-    }
+    
     stages {
-        stage('Run Docker Container') {
+        stage('Build') {
             steps {
-                sh 'docker run -p 8080:90 da1ly/test'
+                script {
+                    def dockerImage = docker.build("Test_j", ".")
+                }
+            }
+        }
+        
+        stage('Run') {
+            steps {
+                script {
+                    docker.run("-p 90:90 -d Run_test")
+                }
             }
         }
     }
