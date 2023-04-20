@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t test_d .'
+                sh 'docker build -t test_d -f Dockerfile .'
             }
         }
         stage('Run Docker Container') {
